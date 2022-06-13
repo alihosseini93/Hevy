@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  
 }
 
 .App-logo {
@@ -38,3 +39,50 @@
     transform: rotate(360deg);
   }
 }
+
+header-style {
+  text-align: center;
+}
+
+
+.box-class {
+  box-shadow: 1px 1px 1px 1px #dfdfdf6b;
+  padding: 20px 0px;
+  width: 100%;
+}
+
+.item-box{
+  padding-right: 50px;
+  align-self: center;
+}
+
+.item-avator {
+  flex-direction: row-reverse;
+}
+
+.routin.style{
+  background-color: rgb(252 252 249);
+}
+
+.routin-box {
+  display: flex;
+  height: auto;
+  padding: 20px 10%;
+  background-color: rgb(252 252 249);
+
+  
+}
+
+.routin-left{
+  flex: 1 ;
+}
+
+.routin-right{
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px ;
+  display: flex;
+  flex: 4;
+  padding: 0 20px
+}
+
+

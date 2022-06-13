@@ -13,11 +13,11 @@ import Logout from '@mui/icons-material/Logout';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import React from 'react';
-import Routines from './Routines';
-import Exercise from './Exercise';
+import logo from "../logo.png";
+import '../index.css';
 
 
-function Header() {
+function Header() { 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -27,15 +27,17 @@ function Header() {
       setAnchorEl(null);
     };
     return (
-      <React.Fragment>
-        <Box className="box-class" sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-          <Typography sx={{ minWidth: 100 }}>
-            <ContentPasteIcon fontSize="small" /> Routines
+      <>
+        
+        <Box className="box-class" sx={{ display: 'flex' , justifyContent: 'center' }}>
+        <a href="/Home"><img className="item-box" src={logo} width="140" height="35" /></a>
+          <Typography className="item-box" sx={{ minWidth: 100 }}>
+            <ContentPasteIcon fontSize="small" /><a href="/routines"> Routines </a>
           </Typography>
-          <Typography sx={{ minWidth: 100 }}>
-            <FitnessCenterIcon fontSize="small" /> Exercise 
+          <Typography className="item-box" sx={{ minWidth: 100 }}>
+            <FitnessCenterIcon fontSize="small" /><a href="/exercise"> Exercise </a> 
           </Typography>
-          <Tooltip title="Account settings">
+          <Tooltip className="item-box item-avator" title="Account settings">
             <IconButton
               onClick={handleClick}
               size="small"
@@ -44,10 +46,11 @@ function Header() {
               aria-haspopup="true"
               aria-expanded={open ? 'true' : undefined}
             >
-              <Avatar sx={{ width: 32, height: 32 }}>A</Avatar>
+            <Avatar sx={{ width: 40, height: 40 }}>A</Avatar>
             </IconButton>
           </Tooltip>
         </Box>
+        
         <Menu
           anchorEl={anchorEl}
           id="account-menu"
@@ -87,17 +90,17 @@ function Header() {
             <ListItemIcon>
               <Settings fontSize="small" />
             </ListItemIcon>
-              Settings
+              <a href="/settings">Settings</a>
           </MenuItem>
           <MenuItem>
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>
-            LogOut
+            <a href="/login">LogIn</a>
           </MenuItem>
           
         </Menu>
-      </React.Fragment>
+      </>
     );
   }
   
