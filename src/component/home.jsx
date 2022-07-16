@@ -2,7 +2,11 @@ import React from "react";
 
 function Home() {
     return ( 
-        <h1>Home</h1>
+        <div className="homeStyle">
+            <h1>Home</h1>
+            <p>Welcome To Hevy</p>
+        </div>
+        
      );
 }
 

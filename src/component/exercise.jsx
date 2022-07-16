@@ -1,165 +1,406 @@
-// import React from 'react';
-// import Header from './header';
-// import '../App.css';
-// import Button from '@mui/material/Button';
-// import DeleteIcon from '@mui/icons-material/Delete';
-// import SendIcon from '@mui/icons-material/Send';
-// import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
-// import ContentPasteIcon from '@mui/icons-material/ContentPaste';
-// import Paper from '@mui/material/Paper';
-// import { width } from '@mui/system';
-
-
-
-// function Exercise() {
-//     return ( 
-//         <div className='rourin.style' >
-//             <Header />
-//             <div className='routin-box'>
-//                 <div className='routin-left'>
-//                     <h2>My Routines</h2>
-//                     <Button style={{margin: "10px 0px" , display:"flex" , width: "70%"  }} variant="outlined" startIcon={<ContentPasteIcon />}>
-//                         New Routine
-//                     </Button>
-//                     <Button style={{margin: "10px 0px" , display:"flex" , width: "70%"}} className='button' variant="outlined" startIcon={<CreateNewFolderIcon />}>
-//                         New Folder
-//                     </Button>
-
-//                 </div>
-//                 <div className='routin-right' >
-//                     <h2>My Routines</h2>
-//                 </div>
-//             </div>
-            
-//         </div>
-//      );
-// }
-
-
-import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import OutlinedInput from '@mui/material/OutlinedInput';
+import React from 'react';
+import Navbar from './navbar';
+import '../App.css';
+import '../index.css';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send';
+import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
+import ContentPasteIcon from '@mui/icons-material/ContentPaste';
+import Paper from '@mui/material/Paper';
+import { width } from '@mui/system';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import Header from './header';
+import InputBase from '@mui/material/InputBase';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import DirectionsIcon from '@mui/icons-material/Directions';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import { green, pink } from '@mui/material/colors';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import PageviewIcon from '@mui/icons-material/Pageview';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import Fit1 from "../img/fit1.jpg";
+import Fit2 from "../img/fit2.jpg";
+import Fit3 from "../img/fit3.jpg";
+import {useDropzone} from 'react-dropzone';
 
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+  
+const equipment= [
+    {
+      value: 'allequipment',
+      label: 'All Equipment',
     },
-  },
-};
-
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
-
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
-export default function MultipleSelectPlaceholder() {
-  const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
-
-  const handleChange = (event) => {
+    {
+      value: 'none',
+      label: 'None',
+    },
+    {
+      value: 'barbell',
+      label: 'Barbell',
+    },
+    {
+      value: 'dumbbell',
+      label: 'Dumbbell',
+    },
+    {
+      value: 'kettlebell',
+      label: 'Kettlebell',
+    },
+  ];
+const muscles = [
+    {
+      value: 'allmuscles',
+      label: 'All Muscles',
+    },
+    {
+      value: 'abdominals',
+      label: 'Abdominals',
+    },
+    {
+      value: 'abductors',
+      label: 'Abductors',
+    },
+    {
+      value: 'biceps',
+      label: 'Biceps',
+    },
+  ];
+function Exercise() {
     const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
+        getRootProps,
+        getInputProps,
+        isDragActive,
+        isDragAccept,
+        isDragReject
+      } = useDropzone({
+        accept: {
+          'image/jpeg': ['.jpeg', '.png']
+        }
+    });
+    const [text, setText] = React.useState('');
+    const handlChange = (event) => {
+        setText(event.target.value);
+    };
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const [currency, setCurrency] = React.useState('allequipment');
+
+    const handleChange = (event) => {
+      setCurrency(event.target.value);
+    };
+    const [curren, setCurren] = React.useState('allmuscles');
+
+    const handleChanges = (event) => {
+      setCurren(event.target.value);
+    };
+  
+    return (
+        <div className='exercise.style' >
+            <Navbar />
+            <div className='exercises'>
+                <div className='exercise-box'>
+                    <div className='exercise-left'>
+                        <Box component="form" sx={{'& .MuiTextField-root': { margin:'4px 0' , width: '35ch' },}} noValidate autoComplete="off">
+                            <p>Filters</p>
+                            <div>
+                                <TextField
+                                    id="outlined-select"
+                                    select
+                                    value={currency}
+                                    onChange={handleChange}
+                                    
+                                >
+                                    {equipment.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                    ))}
+                                </TextField>
+                            </div>
+                            <div>
+                                <TextField
+                                    id="outlined-select-currency"
+                                    select
+                                    value={curren}
+                                    onChange={handleChanges}
+                                >
+                                    {muscles.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                    ))}
+                                </TextField>
+                            </div>
+                        </Box>
+                        <libary>
+                            <div className='libaryTitle'>
+                                <p>Library</p>
+                                <a className='pointer' onClick={handleOpen}>+ Create Exercise</a>
+                            </div>
+                            <Modal
+                                open={open}
+                                onClose={handleClose}
+                                aria-labelledby="modal-modal-title"
+                                aria-describedby="modal-modal-description"
+                            >
+                            <Box className="modalBox">
+                                <Typography id="modal-modal-title" variant="h6" component="h2">
+                                    Create Exercise
+                                </Typography>
+                                <div className="container">
+                                    <div {...getRootProps({className: 'dropzone , pointer'})} >
+                                        <input {...getInputProps()} />
+                                        {!isDragActive && (
+                                        <>
+                                            <Stack direction="row" spacing={2}>
+                                                <Avatar sx={{width:'80px',height:'80px', border:'solid 2px rgb(224, 224, 224)' , backgroundColor :'#fff'}}>
+                                                <CameraAltIcon sx={{fontSize: '2rem' , color: '#000'}}/>
+                                                </Avatar>
+                                            </Stack>
+                                            <p>Add Image</p>
+                                        </>
+                                        )}
+                                    </div>
+                                </div>
+                                <div className="listcreateExercise">
+                                    <input type="text" id="lname" name="lname" placeholder="Exercise Name"></input>
+                                </div>
+                                <div className="formatSelect">
+                                    <p>Exercise Type</p>
+                                    <div style={{width:'300px'}} className="formatControler">
+                                        <FormControl className="formControl" >
+                                            <InputLabel sx={{lineHeight:'.7em'}} id="demo-simple-select-autowidth-label">Select</InputLabel>
+                                            <Select
+                                            sx= {{height:'40px'}}
+                                            id="demo-simple-select-autowidth"
+                                            value={text}
+                                            onChange={handlChange}
+                                            autoWidth
+                                            label="Select"
+                                            >
+                                            <MenuItem value="" sx={{width:'290px'}}>
+                                                <em>None</em>
+                                            </MenuItem>
+                                            <MenuItem value={10}>Twenty</MenuItem>
+                                            <MenuItem value={21}>Twenty one</MenuItem>
+                                            <MenuItem value={22}>Twenty one and a half</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </div>    
+                                </div>
+                                <hr style={{margin : '20px 0'}}></hr>
+                                <div className="formatSelect">
+                                    <p>Equipment</p>
+                                    <div className="formatControler">
+                                        <FormControl className="formControl" >
+                                            <InputLabel sx={{lineHeight:'.7em'}} id="demo-simple-select-autowidth-label">Select</InputLabel>
+                                            <Select
+                                            sx= {{height:'40px'}}
+                                            id="demo-simple-select-autowidth"
+                                            value={text}
+                                            onChange={handlChange}
+                                            autoWidth
+                                            label="Select"
+                                            >
+                                            <MenuItem value="" sx={{width:'190px'}}>
+                                                <em>None</em>
+                                            </MenuItem>
+                                            <MenuItem value={10}>Twenty</MenuItem>
+                                            <MenuItem value={21}>Twenty one</MenuItem>
+                                            <MenuItem value={22}>Twenty one and a half</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </div>    
+                                </div>
+                                <hr style={{margin : '20px 0'}}></hr>
+                                <div className="formatSelect">
+                                    <p>Primary Muscle Group</p>
+                                    <div className="formatControler">
+                                        <FormControl className="formControl" >
+                                            <InputLabel sx={{lineHeight:'.7em'}} id="demo-simple-select-autowidth-label">Select</InputLabel>
+                                            <Select
+                                            sx= {{height:'40px'}}
+                                            id="demo-simple-select-autowidth"
+                                            value={text}
+                                            onChange={handlChange}
+                                            autoWidth
+                                            label="Select"
+                                            >
+                                            <MenuItem value="" sx={{width:'190px'}}>
+                                                <em>None</em>
+                                            </MenuItem>
+                                            <MenuItem value={10}>Twenty</MenuItem>
+                                            <MenuItem value={21}>Twenty one</MenuItem>
+                                            <MenuItem value={22}>Twenty one and a half</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </div>    
+                                </div>
+                                <hr style={{margin : '20px 0'}}></hr>
+                                <div className="formatSelect">
+                                    <p>Other Muscles</p>
+                                    <div className="formatControler">
+                                        <FormControl className="formControl" >
+                                            <InputLabel sx={{lineHeight:'.7em'}} id="demo-simple-select-autowidth-label">Select</InputLabel>
+                                            <Select
+                                            sx= {{height:'40px'}}
+                                            id="demo-simple-select-autowidth"
+                                            value={text}
+                                            onChange={handlChange}
+                                            autoWidth
+                                            label="Select"
+                                            >
+                                            <MenuItem value="" sx={{width:'190px'}}>
+                                                <em>None</em>
+                                            </MenuItem>
+                                            <MenuItem value={10}>Twenty</MenuItem>
+                                            <MenuItem value={21}>Twenty one</MenuItem>
+                                            <MenuItem value={22}>Twenty one and a half</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </div>    
+                                </div>
+                                <div className="saveExercise">
+
+                                <button>Save Routine</button>
+                                </div>
+                            </Box>
+                            </Modal>
+                            <div>
+                            <Paper
+                                component="form"
+                                sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', backgroundColor: 'rgb(255 226 226);' }}
+                                >
+                                <IconButton type="submit" sx={{ p: '5px' }} aria-label="search">
+                                    <SearchIcon />
+                                </IconButton>
+                                <InputBase
+                                    sx={{ ml: 1, flex: 1 }}
+                                    placeholder="Search Exercise"
+                                    inputProps={{ 'aria-label': 'search exercise' }}
+                                />
+                                
+                            </Paper>
+                            </div>
+                            <div>
+                                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' , maxHeight: 300,position: 'relative', overflow: 'auto',}}>
+                                    <ListItem alignItems="flex-start">
+                                        <ListItemAvatar>
+                                        <Avatar alt="Remy Sharp" src={Fit1} />
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                        primary="Ab Scissors"
+                                        secondary={
+                                            <React.Fragment>
+                                            <Typography
+                                                sx={{ display: 'inline' }}
+                                                component="span"
+                                                variant="body2"
+                                                color="text.primary"
+                                            >
+                                            </Typography>
+                                            {"Abdominals"}
+                                            </React.Fragment>
+                                        }
+                                        />
+                                    </ListItem>
+                                    <Divider variant="inset" component="li" />
+                                    <ListItem alignItems="flex-start">
+                                        <ListItemAvatar>
+                                        <Avatar alt="Travis Howard" src={Fit2} />
+
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                        primary="Ab Wheel"
+                                        secondary={
+                                            <React.Fragment>
+                                            <Typography
+                                                sx={{ display: 'inline' }}
+                                                component="span"
+                                                variant="body2"
+                                                color="text.primary"
+                                            >
+                                            </Typography>
+                                            {"Abdominals"}
+                                            </React.Fragment>
+                                        }
+                                        />
+                                    </ListItem>
+                                    <Divider variant="inset" component="li" />
+                                    <ListItem alignItems="flex-start">
+                                        <ListItemAvatar>
+                                        <Avatar alt="Cindy Baker" src={Fit3} />
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                        primary="Arnold Press (Dumbbell)"
+                                        secondary={
+                                            <React.Fragment>
+                                            <Typography
+                                                sx={{ display: 'inline' }}
+                                                component="span"
+                                                variant="body2"
+                                                color="text.primary"
+                                            >
+                                            </Typography>
+                                            {'Shoulders'}
+                                            </React.Fragment>
+                                        }
+                                        />
+                                    </ListItem>
+                                    <Divider variant="inset" component="li" />
+                                    <ListItem alignItems="flex-start">
+                                        <ListItemAvatar>
+                                        <Avatar alt="Cindy Baker" src={Fit3} />
+                                        </ListItemAvatar>
+                                        <ListItemText
+                                        primary="Arnold Press (Dumbbell)"
+                                        secondary={
+                                            <React.Fragment>
+                                            <Typography
+                                                sx={{ display: 'inline' }}
+                                                component="span"
+                                                variant="body2"
+                                                color="text.primary"
+                                            >
+                                            </Typography>
+                                            {'Shoulders'}
+                                            </React.Fragment>
+                                        }
+                                        />
+                                    </ListItem>
+                                </List>
+                            </div>
+                        </libary>
+                    </div>
+                    <div className="exercise-right">
+                        <FitnessCenterIcon/>
+                        <h2>Select an exercise</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
-  };
-
-  return (
-    <div>
-        <Header />
-      <FormControl style={{display:"flex"}} sx={{ m: 1, width: 300, mt: 3 }}>
-        <Select
-          multiple
-          displayEmpty
-          value={personName}
-          onChange={handleChange}
-          input={<OutlinedInput />}
-          renderValue={(selected) => {
-            if (selected.length === 0) {
-              return <em>None</em>;
-            }
-
-            return selected.join(', ');
-          }}
-          MenuProps={MenuProps}
-          inputProps={{ 'aria-label': 'Without label' }}
-        >
-          <MenuItem disabled value="">
-            <em>None</em>
-          </MenuItem>
-          {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
-            >
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <FormControl style={{display:"flex"}}  sx={{ m: 1, width: 300, mt: 3 }}>
-        <Select
-          multiple
-          displayEmpty
-          value={personName}
-          onChange={handleChange}
-          input={<OutlinedInput />}
-          renderValue={(selected) => {
-            if (selected.length === 0) {
-              return <em>Placeholder</em>;
-            }
-
-            return selected.join(', ');
-          }}
-          MenuProps={MenuProps}
-          inputProps={{ 'aria-label': 'Without label' }}
-        >
-          <MenuItem disabled value="">
-            <em>Placeholder</em>
-          </MenuItem>
-          {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
-            >
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
-  );
 }
 
 
-// export default Exercise;
+export default Exercise;
+
+
+
