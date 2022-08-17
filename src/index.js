@@ -6,6 +6,9 @@ import Exercise from "./component/exercise";
 import Login from "./component/login";
 import Settings from "./component/settings";
 import Newroutin from "./component/newroutine";
+import { FontAwesomeIcon } from '@fortawesome/free-solid-svg-icons'
+
+
 
 
 const root = ReactDOM.createRoot(

@@ -146,7 +146,7 @@ function Newroutin() {
                             <div>
                             <Paper
                                 component="form"
-                                sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', backgroundColor: 'rgb(255 226 226);' }}
+                                sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', backgroundColor: 'rgb(240, 240, 240);' }}
                                 >
                                 <IconButton type="submit" sx={{ p: '5px' }} aria-label="search">
                                     <SearchIcon />

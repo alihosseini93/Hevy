@@ -1,3 +1,7 @@
+body {
+  background-color: rgb(252, 252, 252);
+}
+
 .App {
   text-align: center;
   
@@ -74,12 +78,9 @@ header-style {
   min-height: 100%;
 }
 .exercise.style{
-  width: 100%;
   min-height: 100%;
 }
-.routins{
-  background-color: rgb(252, 252, 252);
-}
+
 .exercises{
   background-color: rgb(252, 252, 252);
 }
@@ -90,7 +91,6 @@ header-style {
   padding: 20px;
 }
 .exercise-box {
-  display: flex;
   max-width: 1024px;
   margin: 0px auto;
   padding: 20px 30px;
@@ -99,7 +99,6 @@ header-style {
   width: 20%;
 }
 .exercise-left {
-  width: 30%;
   background-color: #fff;
   border : 1px solid rgb(170, 171, 176); 
   border-radius: 8px ;
@@ -121,7 +120,6 @@ header-style {
 .exercise-right{
   align-items: center;
   text-align: center;
-  width: 65%;
    
 }
 
@@ -373,7 +371,6 @@ FormControl InputLabel{
 }
 
 .homeStyle {
-  background-color: rgb(252, 252, 252);
   width: 100%;
   padding: 200px 0;
   min-height: 100%;

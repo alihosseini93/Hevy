@@ -115,9 +115,9 @@ function Exercise() {
         <div className='exercise.style' >
             <Navbar />
             <div className='exercises'>
-                <div className='exercise-box'>
-                    <div className='exercise-left'>
-                        <Box component="form" sx={{'& .MuiTextField-root': { margin:'4px 0' , width: '35ch' },}} noValidate autoComplete="off">
+                <div className='exercise-box lg:flex'>
+                    <div className='exercise-left lg:w-65'>
+                        <Box component="form" sx={{'& .MuiTextField-root': { margin:'4px 0' , width: '100%' },}} noValidate autoComplete="off">
                             <p>Filters</p>
                             <div>
                                 <TextField
@@ -286,7 +286,7 @@ function Exercise() {
                             <div>
                             <Paper
                                 component="form"
-                                sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', backgroundColor: 'rgb(255 226 226);' }}
+                                sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', backgroundColor: 'rgb(240, 240, 240);' }}
                                 >
                                 <IconButton type="submit" sx={{ p: '5px' }} aria-label="search">
                                     <SearchIcon />
@@ -300,7 +300,7 @@ function Exercise() {
                             </Paper>
                             </div>
                             <div>
-                                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' , maxHeight: 300,position: 'relative', overflow: 'auto',}}>
+                                <List sx={{ width: '100%', bgcolor: 'background.paper' , maxHeight: 300,position: 'relative', overflow: 'auto',}}>
                                     <ListItem alignItems="flex-start">
                                         <ListItemAvatar>
                                         <Avatar alt="Remy Sharp" src={Fit1} />
@@ -389,7 +389,7 @@ function Exercise() {
                             </div>
                         </libary>
                     </div>
-                    <div className="exercise-right">
+                    <div className="exercise-right md:mt-50 lg:w-35">
                         <FitnessCenterIcon/>
                         <h2>Select an exercise</h2>
                     </div>

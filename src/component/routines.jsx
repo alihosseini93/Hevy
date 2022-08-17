@@ -12,7 +12,6 @@ import { width } from '@mui/system';
 
 
 
-
 function Routines() {
     return (
         <div className='rourin.style' >
