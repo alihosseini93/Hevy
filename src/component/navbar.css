@@ -1,0 +1,50 @@
+
+.navBar {
+    display: flex;
+    max-width: 1024px;
+    margin: 0px auto;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    height: 61px;
+    background-color: white;
+    padding-left: 10px;
+    
+    
+}
+
+.navBox {
+    display: flex;
+    align-items: center;  
+}
+.navMenu {
+    display: flex;
+    flex-direction: row;
+    margin-left: 25px;
+    align-items: center;
+}
+.navMenu a {
+    display: flex;
+    flex: 1 1 0%;
+    color: rgb(109, 114, 127);  
+}
+
+.navMenu a:hover {
+    color : rgb(24, 24, 24)
+}
+.navMenuItem {
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0px 25px;
+    
+    
+}
+.navMenuItem p {
+    padding-left: 6px;
+}

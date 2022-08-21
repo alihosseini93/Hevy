@@ -89,14 +89,13 @@ function Newroutin() {
     return ( 
         <div className='rourin.style' >
             <Navbar />
-            <div className='exercise-box'>
-                   
-                    <div className="exercise-right">
+            <div className='exercise-box  md:flex' >
+                    <div className="exercise-right  max-md:w-full mb-5 lg:w-4/6 md:mr-4">
                         <div className="croutin">
                             <h2>Create Routine</h2>
                             <button>Save Routine</button>
                         </div>
-                        <div className="listRoutin">
+                        <div className="listRoutin ">
                             <input type="text" id="lname" name="lname" placeholder="Routine Title"></input>
                             <div style={{paddingTop: "180px"}}>
                                 <FitnessCenterIcon fontSize="large"/>
@@ -105,8 +104,8 @@ function Newroutin() {
                         </div>
                     </div>
                      
-                    <div className='exercise-left'>
-                        <Box component="form" sx={{'& .MuiTextField-root': { margin:'4px 0' , width: '35ch' },}} noValidate autoComplete="off">
+                    <div className='exercise-left  max-md:w-full mb-5 lg:w-2/6'>
+                        <Box component="form" sx={{'& .MuiTextField-root': { margin:'4px 0' , width: '100%' },}} noValidate autoComplete="off">
                             <p>Filters</p>
                             <div>
                                 <TextField
@@ -160,7 +159,7 @@ function Newroutin() {
                             </Paper>
                             </div>
                             <div>
-                                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' , maxHeight: 300,position: 'relative', overflow: 'auto',}}>
+                                <List sx={{ width: '100%', bgcolor: 'background.paper' , maxHeight: 300,position: 'relative', overflow: 'auto',}}>
                                     <ListItem alignItems="flex-start">
                                         <ListItemAvatar>
                                         <Avatar alt="Remy Sharp" src={Fit1} />

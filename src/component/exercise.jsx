@@ -11,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import { width } from '@mui/system';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import AddIcon from '@mui/icons-material/Add';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
@@ -114,9 +115,9 @@ function Exercise() {
     return (
         <div className='exercise.style' >
             <Navbar />
-            <div className='exercises'>
+            <div>
                 <div className='exercise-box lg:flex'>
-                    <div className='exercise-left lg:w-65'>
+                    <div className='exercise-left  max-md:w-full mb-5 lg:w-2/6'>
                         <Box component="form" sx={{'& .MuiTextField-root': { margin:'4px 0' , width: '100%' },}} noValidate autoComplete="off">
                             <p>Filters</p>
                             <div>
@@ -302,6 +303,7 @@ function Exercise() {
                             <div>
                                 <List sx={{ width: '100%', bgcolor: 'background.paper' , maxHeight: 300,position: 'relative', overflow: 'auto',}}>
                                     <ListItem alignItems="flex-start">
+                                        <AddIcon className= "listitem-icon m-4" />
                                         <ListItemAvatar>
                                         <Avatar alt="Remy Sharp" src={Fit1} />
                                         </ListItemAvatar>
@@ -321,11 +323,10 @@ function Exercise() {
                                         }
                                         />
                                     </ListItem>
-                                    <Divider variant="inset" component="li" />
+                                    <hr className='border-t-2'></hr>
                                     <ListItem alignItems="flex-start">
                                         <ListItemAvatar>
                                         <Avatar alt="Travis Howard" src={Fit2} />
-
                                         </ListItemAvatar>
                                         <ListItemText
                                         primary="Ab Wheel"
@@ -389,7 +390,7 @@ function Exercise() {
                             </div>
                         </libary>
                     </div>
-                    <div className="exercise-right md:mt-50 lg:w-35">
+                    <div className="exercise-right  max-md:w-full mb-5 lg:w-4/6 md:mr-4">
                         <FitnessCenterIcon/>
                         <h2>Select an exercise</h2>
                     </div>
