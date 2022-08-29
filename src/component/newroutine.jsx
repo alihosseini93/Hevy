@@ -89,8 +89,8 @@ function Newroutin() {
     return ( 
         <div className='rourin.style' >
             <Navbar />
-            <div className='exercise-box  md:flex' >
-                    <div className="exercise-right  max-md:w-full mb-5 lg:w-4/6 md:mr-4">
+            <div className='exercise-box md:flex' >
+                    <div className="exercise-right max-md:w-full mb-5 lg:w-4/6 md:mr-4">
                         <div className="croutin">
                             <h2>Create Routine</h2>
                             <button>Save Routine</button>
@@ -104,7 +104,7 @@ function Newroutin() {
                         </div>
                     </div>
                      
-                    <div className='exercise-left  max-md:w-full mb-5 lg:w-2/6'>
+                    <div className='exercise-left hidden max-md:w-full mb-5 lg:w-2/6 sm:inline'>
                         <Box component="form" sx={{'& .MuiTextField-root': { margin:'4px 0' , width: '100%' },}} noValidate autoComplete="off">
                             <p>Filters</p>
                             <div>

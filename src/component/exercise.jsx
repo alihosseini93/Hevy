@@ -35,11 +35,13 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import Fit1 from "../img/fit1.jpg";
 import Fit2 from "../img/fit2.jpg";
 import Fit3 from "../img/fit3.jpg";
+import Fit11 from "../img/fit1-1.jpg";
+import vFit1 from "../video/Fit1.mp4";
 import {useDropzone} from 'react-dropzone';
-
 
   
 const equipment= [
@@ -82,6 +84,39 @@ const muscles = [
       label: 'Biceps',
     },
   ];
+  const Results1 = (props) => (
+    <div id="results1" className="search-results">
+        <h2 className='font-bold text-xl'>Ab Scissors</h2>
+        <div className='my-4 flex'>
+            <img className='border-2 py-10 rounded-lg w-3/5' alt="Travis Howard" src={Fit11} />
+            <info className='w-2/5 ml-5'>
+                <h3 className='color-red'>info</h3>
+                <p className='mt-2'><FitnessCenterIcon fontSize="small" /> Equipment: Other</p>
+                <p className='mt-3'><AccessibilityNewIcon fontSize="small"/> Primary: Abdominals</p>
+            </info>
+        </div>
+        <h2 className='font-bold text-xl'>Statistics</h2>
+        <h2 className='font-bold text-xl mt-10'>reps</h2>
+    </div>
+  )
+  
+  const Results2 = () => (
+    <div id="results2" className="search-results">
+        <h2 className='font-bold text-xl'>Ab Wheel</h2>
+        <div className='my-4 flex'>
+            <video className='border-2 rounded-lg w-3/5' autoPlay loop muted>
+                <source src={vFit1} type="video/mp4" />
+            </video>
+            <info className='w-2/5 ml-5'>
+                <h3 className='color-red'>info</h3>
+                <p className='mt-2'><FitnessCenterIcon fontSize="small" /> Equipment: Other</p>
+                <p className='mt-3'><AccessibilityNewIcon fontSize="small"/> Primary: Abdominals</p>
+            </info>
+        </div>
+        <h2 className='font-bold text-xl'>Statistics</h2>
+        <h2 className='font-bold text-xl mt-10'>reps</h2>
+    </div>
+  )  
 function Exercise() {
     const {
         getRootProps,
@@ -111,13 +146,19 @@ function Exercise() {
     const handleChanges = (event) => {
       setCurren(event.target.value);
     };
+    const [showResults1, setShowResults1] = React.useState(false)
+    const onClick1 = () => setShowResults1(true)
+    const [showResults2, setShowResults2] = React.useState(false)
+    const onClick2 = () => setShowResults2(true)    
   
     return (
+                    
         <div className='exercise.style' >
             <Navbar />
+
             <div>
-                <div className='exercise-box lg:flex'>
-                    <div className='exercise-left  max-md:w-full mb-5 lg:w-2/6'>
+                <div className='exercise-box lg:flex sm:w-full '>
+                    <div className='exercise-left hidden max-md:w-full mb-5 lg:w-2/6 sm:inline'>
                         <Box component="form" sx={{'& .MuiTextField-root': { margin:'4px 0' , width: '100%' },}} noValidate autoComplete="off">
                             <p>Filters</p>
                             <div>
@@ -302,8 +343,7 @@ function Exercise() {
                             </div>
                             <div>
                                 <List sx={{ width: '100%', bgcolor: 'background.paper' , maxHeight: 300,position: 'relative', overflow: 'auto',}}>
-                                    <ListItem alignItems="flex-start">
-                                        <AddIcon className= "listitem-icon m-4" />
+                                    <ListItem alignItems="flex-start"  onClick={onClick1}>
                                         <ListItemAvatar>
                                         <Avatar alt="Remy Sharp" src={Fit1} />
                                         </ListItemAvatar>
@@ -324,7 +364,7 @@ function Exercise() {
                                         />
                                     </ListItem>
                                     <hr className='border-t-2'></hr>
-                                    <ListItem alignItems="flex-start">
+                                    <ListItem alignItems="flex-start"  onClick={onClick2}>
                                         <ListItemAvatar>
                                         <Avatar alt="Travis Howard" src={Fit2} />
                                         </ListItemAvatar>
@@ -390,9 +430,16 @@ function Exercise() {
                             </div>
                         </libary>
                     </div>
-                    <div className="exercise-right  max-md:w-full mb-5 lg:w-4/6 md:mr-4">
-                        <FitnessCenterIcon/>
-                        <h2>Select an exercise</h2>
+                    <div className="max-md:w-full mb-5 lg:w-4/6 md:mr-4 px-5">
+                        <div className='text-center' {(this.Results1 ? 'show' : 'hidden')}>
+                            <FitnessCenterIcon/>
+                            <h2>Select an exercise</h2>  
+                        </div>
+                        { showResults1 ? <Results1 />: null }
+                        { showResults2 ? <Results2 /> : null }
+                        
+
+                        
                     </div>
                 </div>
             </div>

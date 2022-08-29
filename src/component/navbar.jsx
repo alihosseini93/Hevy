@@ -101,12 +101,13 @@ function Navbar() {
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-          <MenuItem>
+          <a href='/settings'><MenuItem>
             <ListItemIcon>
               <Settings fontSize="small" />
             </ListItemIcon>
             Settings
           </MenuItem>
+          </a>
           <MenuItem>
             <ListItemIcon>
               <Logout fontSize="small" />
