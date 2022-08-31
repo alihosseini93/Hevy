@@ -431,7 +431,7 @@ function Exercise() {
                         </libary>
                     </div>
                     <div className="max-md:w-full mb-5 lg:w-4/6 md:mr-4 px-5">
-                        <div className='text-center' {(this.Results1 ? 'show' : 'hidden')}>
+                        <div className='text-center'>
                             <FitnessCenterIcon/>
                             <h2>Select an exercise</h2>  
                         </div>
