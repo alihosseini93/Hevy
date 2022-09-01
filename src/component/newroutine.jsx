@@ -1,51 +1,16 @@
 import React, { useState } from "react";
 import { styled } from '@mui/material/styles';
 import { useDispatch } from "react-redux";
-import { Link } from 'react-router-dom'
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardActions from '@mui/material/CardActions';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import Collapse from '@mui/material/Collapse';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
 import Navbar from "./navbar";
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import Input from '@mui/material/Input';
-import DeleteIcon from '@mui/icons-material/Delete';
-import SendIcon from '@mui/icons-material/Send';
-import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
-import ContentPasteIcon from '@mui/icons-material/ContentPaste';
-import Paper from '@mui/material/Paper';
-import { width } from '@mui/system';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import InputBase from '@mui/material/InputBase';
-import Divider from '@mui/material/Divider';
-import MenuIcon from '@mui/icons-material/Menu';
-import TextareaAutosize from '@mui/material/TextareaAutosize';
-import SearchIcon from '@mui/icons-material/Search';
-import DirectionsIcon from '@mui/icons-material/Directions';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
+import {Button,Grid,Typography,Avatar,ListItemAvatar,ListItemText,Box,List,ListItem,Input,MenuItem,Divider,InputBase,Paper,TextField} from '@mui/material';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
-import CardContent from '@mui/material/CardContent';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
-import AvTimerIcon from '@mui/icons-material/AvTimer';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { setExercise } from '../store/slice/exerciseSlice'
 import CardsSelect from './cardSelect';
-import Grid from '@mui/material/Grid';
+
+import SearchIcon from '@mui/icons-material/Search';
+import { width } from '@mui/system';
+import { useSelector } from 'react-redux';
 import Fit1 from "../img/fit1.jpg";
 import Fit2 from "../img/fit2.jpg";
 import Fit3 from "../img/fit3.jpg";
@@ -152,18 +117,16 @@ function Newroutin() {
     const handleChanges = (event) => {
         setCurren(event.target.value);
     };
-    const [select, setSelect] = useState("")
-    const dispatch = useDispatch()
-    // 
-    // const SelectionExercise = (option) => {
-        
-        // exercise.map((exercise) => exercise.id == option ?
-        //   <CardsSelect key={exercise.id} title={exercise.title} />  : ''
-        // )
-    // }
-    // <CardsSelect key={exercise.id} exercise={ exercise} />
-    // 
 
+
+    const dispatch = useDispatch()
+
+    const handleList = (option) => {
+        const listexercise = exercise.find((item) => item.id == option)
+        dispatch(setExercise(listexercise))
+    }
+      const list = useSelector(state => state.exercise.list)
+    console.log(list);
     return (
         <div className='rourin.style' >
             <Navbar />
@@ -186,19 +149,17 @@ function Newroutin() {
                         <div className="mt-3">
                             <Paper elevation={3} >
 
-                                {/* <input className="m-3" style={{ minWidth: "960px", height: 40 }} type="text" id="lname" name="lname" placeholder="Routine Title"></input> */}
-
-                                {/* <div style={{ paddingTop: "180px" }}> */}
-                                {/* <FitnessCenterIcon fontSize="large" /> */}
-                                {/* <h2>Select an exercise</h2> */}
-                                {/* </div> */}
-
-
+                                <input className="m-1" style={{ minWidth: "960px", height: 40 }} type="text" id="lname" name="lname" placeholder="Routine Title"></input>
                                 {/* card for task list */}
 
-                    {    <CardsSelect />}
+                                {list.length>0? <CardsSelect /> : 
+                                <div className='fitnessIcon'>
+                                    <FitnessCenterIcon color="primary" sx={{ fontSize: 100 }} />
+                                    <h2>Select an exercise</h2>
+                                </div>
 
 
+                                }
                             </Paper>
                         </div>
                     </div>
@@ -265,7 +226,7 @@ function Newroutin() {
                                 <List sx={{ width: '100%', bgcolor: 'background.paper', maxHeight: 300, position: 'relative', overflow: 'auto', }}>
                                     <Divider variant="inset" component="li" />
 
-                                    {exercise.map((option) => <Link to={`/CardSelect/${option.id}`} key={option.id} className="flex"> <ListItem alignItems="flex-start">
+                                    {exercise.map((option) => <button onClick={() => handleList(option.id)} key={option.id} className="flex"> <ListItem alignItems="flex-start">
                                         <ListItemAvatar>
                                             <Avatar alt="Remy Sharp" src={option.avatar} />
                                         </ListItemAvatar>
@@ -285,7 +246,7 @@ function Newroutin() {
                                             }
                                         />
                                     </ListItem>
-                                    </Link>)}
+                                    </button>)}
 
 
 

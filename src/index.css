@@ -96,3 +96,15 @@ code {
   min-width: 100px;
   
 }
+.fitnessIcon{
+  min-width: max-content;
+  min-height: 300px;
+  justify-content: center;
+  text-align: center;
+}
+.btnop {
+  text-align: center;
+  justify-content: center;
+  min-width: fit-content;
+}
+

@@ -1,53 +1,24 @@
-import React,{useEffect, useState} from 'react'
-import {useParams} from 'react-router-dom'
-import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardActions from '@mui/material/CardActions';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import Collapse from '@mui/material/Collapse';
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { Grid, Card, CardHeader, FormControl, MenuItem, TextareaAutosize, Typography, CardContent, IconButton, InputLabel, Avatar } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import DeleteIcon from '@mui/icons-material/Delete';
-import SendIcon from '@mui/icons-material/Send';
-import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
-import ContentPasteIcon from '@mui/icons-material/ContentPaste';
-import Paper from '@mui/material/Paper';
-import { width } from '@mui/system';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import InputBase from '@mui/material/InputBase';
-import Divider from '@mui/material/Divider';
-import MenuIcon from '@mui/icons-material/Menu';
-import TextareaAutosize from '@mui/material/TextareaAutosize';
-import SearchIcon from '@mui/icons-material/Search';
-import DirectionsIcon from '@mui/icons-material/Directions';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
-import CardContent from '@mui/material/CardContent';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import AvTimerIcon from '@mui/icons-material/AvTimer';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { setExercise } from '../store/slice/exerciseSlice'
 import Fit1 from "../img/fit1.jpg";
 import Fit2 from "../img/fit2.jpg";
 import Fit3 from "../img/fit3.jpg";
-
+import { createSelectorHook } from 'react-redux';
+import axios from 'axios';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { useSelector } from 'react-redux';
 const CardSelect = (props) => {
- 
- 
 
-   const exercise = [
+    const list = useSelector(state => state.exercise.list)
+
+
+    const exercise = [
         {
             id: 1,
             title: 'Ab Scissors',
@@ -72,67 +43,129 @@ const CardSelect = (props) => {
         },
     ]
 
-   const params = useParams()
-    const listexercise = exercise.find((item) => item.id == params.id)
-   
-    console.log(listexercise);
+
+
+
+
+    const [SET, setSET] = React.useState('');
+
+    const handleChange = (event: SelectChangeEvent) => {
+        setSET(event.target.value);
+    };
+
+
     const [timer, setTimer] = React.useState('');
- 
+
     const handleChangeSelected = (event: SelectChangeEvent) => {
         setTimer(event.target.value);
     };
 
     return (
         <div>
-          <Card sx={{ maxWidth: 'max', marginTop: 5 }}>
-            <CardHeader
-               avatar={
-                   <Avatar  aria-label="recipe">
-                    <img className='imglist'  src={listexercise?.avatar}/>
-                   </Avatar>
-               }
-               action={
-                   <IconButton aria-label="settings">
-                       <MoreVertIcon />
-                   </IconButton>
-               }
-               title={<h1>{listexercise?.title}</h1>}
-           />
-           <CardContent>
-               <Typography variant="body2" color="text.secondary">
-                   <TextareaAutosize
-                       aria-label="empty textarea"
-                       placeholder=" Note..."
-                       style={{ width: 960, height: 40 }}
-                   />
-               </Typography>
-           </CardContent>
-           <Grid container spacing={0}>
-               <Grid xs={2}> <h1 className="m-3 restTimer">  <AvTimerIcon /> Rest Timer : </h1></Grid>
-               <Grid xs={3}>    <FormControl sx={{ m: 1, minWidth: 80 }}>
-                   <InputLabel id="demo-simple-select-autowidth-label">Timer</InputLabel>
-                   <Select
-                       labelId="demo-simple-select-autowidth-label"
-                       id="demo-simple-select-autowidth"
-                       value={timer}
-                       onChange={handleChangeSelected}
-                       autoWidth
-                       label="timer"
-                   >
-                       <MenuItem value="">
-                           <em>None</em>
-                       </MenuItem>
-                       <MenuItem value={0}>OFF</MenuItem>
-                       <MenuItem value={5}>5 s</MenuItem>
-                       <MenuItem value={10}>10 s</MenuItem>
-                   </Select>
-               </FormControl>
-               </Grid>
-           </Grid>
-       </Card>        
-                                        
-       </div>
+              {list.map((item)=>  <Card sx={{ maxWidth: 'max', marginTop: 5 }}>
+             <CardHeader
+                 avatar={
+                     <Avatar aria-label="recipe">
+                         <img className='imglist' src={item?.avatar} />
+                     </Avatar>
+                 }
+                 action={
+                     <IconButton aria-label="settings">
+                         <MoreVertIcon />
+                     </IconButton>
+                 }
+                 title={<h1>{item?.title}</h1>}
+             />
+             <CardContent>
+                 <Typography variant="body2" color="text.secondary">
+                     <TextareaAutosize
+                         aria-label="empty textarea"
+                         placeholder=" Note..."
+                         style={{ width: 960, height: 40 }}
+                     />
+                 </Typography>
+             </CardContent>
+             <Grid container spacing={0}>
+                 <Grid xs={2}> <h1 className="m-3 restTimer">  <AvTimerIcon /> Rest Timer :
+                 </h1>
+                 </Grid>
+                 <Grid xs={3}>    <FormControl sx={{ m: 1, minWidth: 80 }}>
+                     <InputLabel id="demo-simple-select-autowidth-label">Timer</InputLabel>
+                     <Select
+                         labelId="demo-simple-select-autowidth-label"
+                         id="demo-simple-select-autowidth"
+                         value={timer}
+                         onChange={handleChangeSelected}
+                         autoWidth
+                         label="timer"
+                     >
+                         <MenuItem value="">
+                             <em>none</em>
+                         </MenuItem>
+                         <MenuItem value={0}>OFF</MenuItem>
+                         <MenuItem value={5}>5 s</MenuItem>
+                         <MenuItem value={15}>15 s</MenuItem>
+                         <MenuItem value={20}>20 s</MenuItem>
+                         <MenuItem value={25}>25 s</MenuItem>
+                     </Select>
+                 </FormControl>
+                 </Grid>
+                 <Grid xs={7}></Grid>
+                 <Grid sx={{ m: 3, minWidth: 80 }} xs={2}><h1 className='font-bold ' >SET</h1></Grid>
+                 <Grid xs={3}></Grid>
+                 <Grid sx={{ m: 2, minWidth: 80 }} xs={2}><h1 className='font-bold '>REPS</h1></Grid>
+                 <Grid xs={3}></Grid>
+                 <Grid sx={{ m: 3, minWidth: 80 }} xs={2}>
+                     < FormControl sx={{ m: 1, minWidth: 120 }} size="small" >
+                         <InputLabel id="demo-select-small"></InputLabel>
+                         <Select
+                             labelId="demo-select-small"
+                             id="demo-select-small"
+                             value={SET}
+                            
+                             onChange={handleChange}
+                         >
+                             <MenuItem value="">
+                                 <em>None</em>
+                             </MenuItem>
+                             <MenuItem value={1}>1</MenuItem>
+                             <MenuItem value={2}>Warm up</MenuItem>
+                             <MenuItem value={3}>Drop</MenuItem>
+                             <MenuItem value={4}>Failure</MenuItem>
+                         </Select>
+                     </ FormControl>
+                 </Grid>
+                 <Grid xs={3}></Grid>
+                 <Grid sx={{ m: 2, minWidth: 80 }} xs={2}><TextField id="outlined-basic" label="Outlined" variant="outlined" /></Grid>
+                 <Grid sx={{ ml: 50 }} xs={12} ><Button size={'large'} variant="outlined">+ Add Set</Button></Grid>
+             </Grid>
+         </Card>)
+         
+       }
+
+
+        </div>
     )
 }
 
 export default CardSelect
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
